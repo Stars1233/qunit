@@ -13,7 +13,7 @@ jobs:
       DEPLOY_DIR: docs/_site/
       DEPLOY_BRANCH: gh-pages
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Prepare branch
         run: |

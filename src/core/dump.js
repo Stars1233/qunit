@@ -222,6 +222,7 @@ export default (function () {
         keys.sort();
         for (let i = 0; i < keys.length; i++) {
           const key = keys[i];
+          // eslint-disable-next-line compat/compat -- https://github.com/amilajack/eslint-plugin-compat/issues/688
           const val = map[key];
           ret.push(dump.parse(key, 'key') + ': '
             + dump.parse(val, undefined, stack));

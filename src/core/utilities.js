@@ -23,6 +23,7 @@ export function diff (a, b) {
  * @return {boolean}
  */
 export const inArray = Array.prototype.includes
+  // eslint-disable-next-line compat/compat -- Checked
   ? (elem, array) => array.includes(elem)
   : (elem, array) => array.indexOf(elem) !== -1;
 
