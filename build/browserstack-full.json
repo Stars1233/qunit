@@ -3,6 +3,7 @@
   "test_path": ["test/index.html"],
   "test_server_port": "8899",
   "exit_with_fail": true,
+  "ackTimeout": 300,
   "timeout": 600,
   "browsers": [
     "firefox_45",
@@ -46,15 +47,15 @@
     },
     {
       "os": "android",
-      "os_version": "8.1",
+      "os_version": "9.0",
       "real_mobile": true,
-      "device": "Samsung Galaxy Note 9"
+      "device": "Samsung Galaxy S10"
     },
     {
       "os": "ios",
       "os_version": "15.0",
       "real_mobile": true,
-      "device": "iPhone SE 2022"
+      "device": "iPhone 13"
     },
     {
       "os": "ios",
