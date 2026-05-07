@@ -10,14 +10,20 @@ function buildMockPromise (settledValue, shouldFulfill) {
 
   var thenable = {
     then: function (fulfilledCallback, rejectedCallback) {
+      var resolve = function () {};
       defer(function () {
-        return shouldFulfill
+        resolve(shouldFulfill
           ? fulfilledCallback.call(thenable, settledValue)
-          : rejectedCallback.call(thenable, settledValue);
+          : rejectedCallback.call(thenable, settledValue));
       });
 
       // returning another thenable for easy confirmation of return value
-      return buildMockPromise('final promise', true);
+      // (very incomplete implementation, this is enough for the one test that needs it)
+      return {
+        then: function (fulfilledCallback) {
+          resolve = fulfilledCallback;
+        }
+      };
     }
   };
   return thenable;
@@ -567,6 +573,18 @@ QUnit.test('throws', function (assert) {
     /^Error: Invalid expected value type \(array\) provided to assert\.throws\.$/,
     'throws errors when provided an array'
   );
+
+  // return value tests
+  var returnValue = assert.throws(
+    function () {
+      throw 'my error';
+    }
+  );
+  assert.strictEqual(
+    returnValue,
+    'my error',
+    'throws returns the error value'
+  );
 });
 
 QUnit.test('raises', function (assert) {
@@ -581,16 +599,6 @@ QUnit.test('rejects', function (assert) {
   CustomError.prototype.toString = function () {
     return this.message;
   };
-
-  var rejectsReturnValue = assert.rejects(
-    buildMockPromise('my error')
-  );
-
-  assert.equal(
-    typeof rejectsReturnValue.then,
-    'function',
-    'rejects returns a thennable'
-  );
 
   assert.rejects(
     buildMockPromise('my error'),
@@ -743,12 +751,30 @@ QUnit.test('rejects', function (assert) {
     'rejects errors when provided a string'
   );
 
-  // should return a thenable
+  // return value tests
+  var done = assert.async();
   var returnValue = assert.rejects(
-    buildMockPromise(undefined)
+    buildMockPromise('my error')
   );
-  assert.strictEqual(typeof returnValue, 'object');
-  assert.strictEqual(typeof returnValue.then, 'function');
+  assert.strictEqual(
+    typeof returnValue.then,
+    'function',
+    'rejects returns a thenable'
+  );
+  returnValue.then(function (error) {
+    assert.strictEqual(
+      error,
+      'my error',
+      'returned thenable resolves with the rejection value'
+    );
+    done();
+  }, function () {
+    assert.ok(
+      false,
+      'returned thenable does not reject'
+    );
+    done();
+  });
 });
 
 if (typeof window !== 'undefined') {

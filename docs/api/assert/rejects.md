@@ -11,7 +11,8 @@ version_added: "2.5.0"
 ---
 
 `rejects( promise, message = "" )`<br>
-`rejects( promise, expectedMatcher, message = "" )`
+`rejects( promise, expectedMatcher, message = "" )`<br>
+`rejectionValue = await rejects( promise, message = "" )`
 
 Test if the provided promise rejects, and optionally compare the rejection value.
 
@@ -33,6 +34,10 @@ The `expectedMatcher` argument can be:
 * A RegExp that matches (or partially matches) `rejectionValue.toString()`.
 
 Note: in order to avoid confusion between the `message` and the `expectedMatcher`, the `expectedMatcher` **can not** be a string.
+
+`assert.rejects()` returns a promise which is resolved with the rejection value from the provided
+promise. This can be used instead of `expectedMatcher` to assert other facts about the expected
+failure.
 
 ## See also
 
@@ -62,7 +67,7 @@ QUnit.test('example', async function (assert) {
 ### Example: Matcher argument
 
 ```js
-QUnit.test('rejects example', function (assert) {
+QUnit.test('rejects example', async function (assert) {
   // simple check
   assert.rejects(Promise.reject('some error'));
 
@@ -113,6 +118,13 @@ QUnit.test('rejects example', function (assert) {
       return err.toString() === 'some error';
     }
   );
+
+  // custom validation using return value
+  const err = await assert.rejects(
+    Promise.reject(new CustomError('some error'))
+  );
+  assert.true(err instanceof CustomError);
+  assert.strictEqual(err.toString(), 'some error');
 });
 ```
 
@@ -181,17 +193,12 @@ QUnit.test('BAD example', function (assert) {
 });
 ```
 
-If you want to perform additional assertions after a failure, consider performing these directly in your test function, after `assert.rejects()`:
+If you want to perform additional assertions after a failure, consider performing these directly in your test function, after `await assert.rejects()`:
 
 ```js
 QUnit.test('example', async function (assert) {
   const p = feedMe();
-  await assert.rejects(p, RangeError);
-
-  try {
-    await p;
-  } catch (e) {
-    assert.deepEqual(e.somedata, { foo: 'bar' });
-  }
+  const e = await assert.rejects(p, RangeError);
+  assert.deepEqual(e.somedata, { foo: 'bar' });
 });
 ```

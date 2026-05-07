@@ -12,7 +12,8 @@ version_added: "1.0.0"
 ---
 
 `throws( blockFn, message = "" )`<br>
-`throws( blockFn, expectedMatcher, message = "" )`
+`throws( blockFn, expectedMatcher, message = "" )`<br>
+`thrownValue = throws( blockFn, message = "" )`
 
 Test if a callback throws an exception, and optionally compare the thrown error.
 
@@ -30,6 +31,10 @@ The `expectedMatcher` argument can be:
 * An Error constructor, evaluated as `errorValue instanceof expectedMatcher`.
 * A RegExp that matches (or partially matches) the string representation.
 * A callback with your own custom validation, that returns `true` or `false`.
+
+`assert.throws()` returns the value which was thrown from the provided
+function. This can be used instead of `expectedMatcher` to assert other facts about the expected
+failure.
 
 <p class="note" markdown="1">If you need to comply with classic ES3 syntax, such as in early versions of Closure Compiler, you can use `assert.raises()`, which is an alias for `assert.throws()`. It has the same signature and behaviour.</p>
 
@@ -110,5 +115,12 @@ QUnit.test('throws example', function (assert) {
       return err.toString() === 'some error';
     }
   );
+
+  // custom validation using return value
+  const err = assert.throws(function () {
+    throw new CustomError('some error');
+  });
+  assert.true(err instanceof CustomError);
+  assert.strictEqual(err.toString(), 'some error');
 });
 ```
