@@ -1,0 +1,4 @@
+# name: --reporter with a module
+# command: ["qunit", "--reporter", "npm-reporter"]
+
+My run ended!

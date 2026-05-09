@@ -1,0 +1,4 @@
+# name: --reporter with a script
+# command: ["qunit", "--reporter", "./npm-reporter/index.js"]
+
+My run ended!

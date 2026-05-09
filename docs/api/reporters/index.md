@@ -2,7 +2,7 @@
 layout: group
 group: reporters
 title: QUnit.reporters
-excerpt: Built-in reporters for TAP, HTML, console, and perf.
+excerpt: Built-in reporters for TAP, HTML, and more.
 amethyst:
   # Override inherited "pagetype: navigation" to enable Typesense indexing
   pagetype: custom

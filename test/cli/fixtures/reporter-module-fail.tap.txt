@@ -1,0 +1,6 @@
+# name: --reporter with a module and failing
+# command: ["qunit", "--reporter", "npm-reporter", "basic-fail.js"]
+
+My run ended!
+
+# exit code: 1

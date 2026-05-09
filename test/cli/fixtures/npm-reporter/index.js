@@ -7,7 +7,7 @@ NPMReporter.init = function (runner) {
 };
 
 NPMReporter.prototype.onRunEnd = function () {
-  console.log('Run ended!');
+  console.log('My run ended!');
 };
 
 module.exports = NPMReporter;

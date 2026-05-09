@@ -1,0 +1,8 @@
+# name: --reporter lists available modules
+# command: ["qunit", "--reporter"]
+
+# stderr
+Built-in reporters: tap, console
+Extra reporters found among package dependencies: npm-reporter
+
+# exit code: 1

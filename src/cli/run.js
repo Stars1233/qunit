@@ -62,7 +62,11 @@ async function run (args, options) {
 
   options.requires.forEach(requireFromCWD);
 
-  findReporter(options.reporter, QUnit.reporters).init(QUnit);
+  const reporter = findReporter(options.reporter, QUnit.reporters);
+  if (!reporter.init) {
+    utils.error(`Reporter "${options.reporter}" must define an init function.\nhttps://qunitjs.com/api/callbacks/QUnit.on/#reporter-api`);
+  }
+  reporter.init(QUnit);
 
   for (let i = 0; i < files.length; i++) {
     const filePath = path.resolve(process.cwd(), files[i]);

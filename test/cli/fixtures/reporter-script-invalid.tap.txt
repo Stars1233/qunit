@@ -1,0 +1,8 @@
+# name: --reporter error when script is invalid
+# command: ["qunit", "--reporter", "./npm-reporter/invalid.js"]
+
+# stderr
+Reporter "./npm-reporter/invalid.js" must define an init function.
+https://qunitjs.com/api/callbacks/QUnit.on/#reporter-api
+
+# exit code: 1

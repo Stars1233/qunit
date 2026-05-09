@@ -226,5 +226,5 @@ function init (QUnit) {
 
 // CommonJS, or ES Module
 module.exports.init = init;
-export { init };
+export default { init };
 ```
