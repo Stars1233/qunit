@@ -1,0 +1,4 @@
+# command: ["qunit", "basic-fail.js"]
+# env: { "qunit_config_reporters_tap": "false" }
+
+# exit code: 1

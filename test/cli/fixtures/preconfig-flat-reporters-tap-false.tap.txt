@@ -1,0 +1,2 @@
+# command: ["qunit", "basic-one.js"]
+# env: { "qunit_config_reporters_tap": "false" }

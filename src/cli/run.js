@@ -52,6 +52,9 @@ async function run (args, options) {
   if (options.seed) {
     globalThis.qunit_config_seed = options.seed;
   }
+  if (!options.reporter && globalThis.qunit_config_reporters_tap === undefined && process.env.qunit_config_reporters_tap === undefined) {
+    globalThis.qunit_config_reporters_tap = true;
+  }
 
   // Replace any previous instance, e.g. in watch mode
   QUnit = globalThis.QUnit = requireQUnit();
@@ -62,11 +65,13 @@ async function run (args, options) {
 
   options.requires.forEach(requireFromCWD);
 
-  const reporter = findReporter(options.reporter, QUnit.reporters);
-  if (!reporter.init) {
-    utils.error(`Reporter "${options.reporter}" must define an init function.\nhttps://qunitjs.com/api/callbacks/QUnit.on/#reporter-api`);
+  if (options.reporter) {
+    const reporter = findReporter(options.reporter, QUnit.reporters);
+    if (!reporter.init) {
+      utils.error(`Reporter "${options.reporter}" must define an init function.\nhttps://qunitjs.com/api/callbacks/QUnit.on/#reporter-api`);
+    }
+    reporter.init(QUnit);
   }
-  reporter.init(QUnit);
 
   for (let i = 0; i < files.length; i++) {
     const filePath = path.resolve(process.cwd(), files[i]);

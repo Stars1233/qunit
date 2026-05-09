@@ -1,0 +1,3 @@
+# command: ["qunit", "config-reporters-tap-false-fail.js"]
+
+# exit code: 1

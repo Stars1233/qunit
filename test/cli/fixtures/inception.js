@@ -1,5 +1,12 @@
 const outerQUnit = globalThis.QUnit;
 delete globalThis.QUnit;
+
+// Disable any inherited reporters from ENV
+globalThis.QUnit = {
+  config: {
+    reporters: {}
+  }
+};
 const myQUnit = require('../../../src/cli/require-qunit')();
 globalThis.QUnit = outerQUnit;
 

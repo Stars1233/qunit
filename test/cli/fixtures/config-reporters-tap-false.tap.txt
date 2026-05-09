@@ -1,0 +1,1 @@
+# command: ["qunit", "config-reporters-tap-false.js"]
