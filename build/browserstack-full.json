@@ -47,9 +47,9 @@
     },
     {
       "os": "android",
-      "os_version": "9.0",
+      "os_version": "8.1",
       "real_mobile": true,
-      "device": "Samsung Galaxy S10"
+      "device": "Samsung Galaxy Note 9"
     },
     {
       "os": "ios",

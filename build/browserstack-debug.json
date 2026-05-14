@@ -3,6 +3,7 @@
   "test_path": ["test/index.html"],
   "test_server_port": "8899",
   "exit_with_fail": true,
+  "ackTimeout": 300,
   "timeout": 600,
   "browsers": [
     "firefox_current",
