@@ -25,13 +25,13 @@ QUnit.module('browser-runner', function () {
     QUnit.test('example', function (assert) {
       var done = assert.async();
 
-      this.expectedFailure = 'global failure: Error: Example from non-returned promise!';
+      this.expectedFailure = 'global failure: Error: Boo during test';
 
       // eslint-disable-next-line compat/compat -- Checked
       Promise.resolve().then(function () {
-        // prevent test from exiting before unhandled rejection fires
+        // wait until unhandled rejection fires
         setTimeout(done, 20);
-        throw new Error('Example from non-returned promise!');
+        throw new Error('Boo during test');
       });
     });
   });

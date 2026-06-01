@@ -25,6 +25,8 @@ const config = {
   // Select by pattern or case-insensitive substring match against "moduleName: testName"
   filter: '',
 
+  ignoreUnhandledRejections: false,
+
   testFilter: null,
 
   fixture: undefined,

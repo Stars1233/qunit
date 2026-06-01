@@ -53,7 +53,9 @@ export function initBrowser (QUnit, window, document) {
   };
 
   window.addEventListener('unhandledrejection', function (event) {
-    QUnit.onUncaughtException(event.reason);
+    if (!QUnit.config.ignoreUnhandledRejections) {
+      QUnit.onUncaughtException(event.reason);
+    }
   });
 
   QUnit.on('runEnd', function (runEnd) {

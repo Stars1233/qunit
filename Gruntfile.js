@@ -116,6 +116,7 @@ module.exports = function (grunt) {
         'test/browser-runner/autostart.html',
         'test/browser-runner/config-fixture-null.html',
         'test/browser-runner/config-fixture-string.html',
+        'test/browser-runner/config-ignoreUnhandledRejections.html',
         'test/browser-runner/headless.html',
         'test/browser-runner/window-onerror-preexisting-handler.html',
         'test/browser-runner/window-onerror.html'
