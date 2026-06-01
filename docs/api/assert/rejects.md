@@ -35,7 +35,7 @@ The returned promise from `assert.rejects()` is resolved with the rejection valu
 
 ## Changelog
 
-| [QUnit 2.26](https://github.com/qunitjs/qunit/releases/tag/2.26.0) | Added the rejection value.
+| [QUnit 2.26](https://github.com/qunitjs/qunit/releases/tag/2.26.0) | Added the rejection value to the returned promise.
 | [QUnit 2.5](https://github.com/qunitjs/qunit/releases/tag/2.5.0) | Introduced `assert.rejects()`.
 
 ## See also
